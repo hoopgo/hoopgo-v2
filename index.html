@@ -427,6 +427,36 @@ footer {
   font-size: 13px;
 }
 
+/* LIVE LOCATION */
+
+.location-btn {
+  margin-top: 14px;
+  padding: 13px 18px;
+  border-radius: 12px;
+  background: rgba(255,255,255,.14);
+  color: white;
+  border: 1px solid rgba(255,255,255,.28);
+  font-weight: 800;
+  transition: .2s;
+}
+
+.location-btn:hover {
+  background: rgba(255,255,255,.22);
+  transform: translateY(-2px);
+}
+
+.location-btn.loading {
+  opacity: .7;
+  pointer-events: none;
+}
+
+.location-status {
+  min-height: 22px;
+  margin-top: 9px;
+  font-size: 13px;
+  color: #ddd8f2;
+}
+
 /* MOBILE */
 
 @media (max-width: 900px) {
@@ -591,6 +621,11 @@ footer {
           Ara
         </button>
       </div>
+
+      <button class="location-btn" onclick="konumAl()" id="locationBtn">
+        📍 Yakınımdaki fırsatları göster
+      </button>
+      <div class="location-status" id="locationStatus"></div>
 
     </div>
 
@@ -846,14 +881,9 @@ footer {
 
 
 <script>
-
 function ara() {
-
-  const input =
-    document.getElementById("searchInput");
-
-  const kelime =
-    input.value.trim();
+  const input = document.getElementById("searchInput");
+  const kelime = input.value.trim();
 
   if (!kelime) {
     alert("Ne aradığını yaz 😊");
@@ -861,22 +891,59 @@ function ara() {
     return;
   }
 
-  alert(
-    '"' +
-    kelime +
-    '" için arama sistemi birazdan aktif olacak.'
-  );
+  alert('"' + kelime + '" için arama sistemi birazdan aktif olacak.');
 }
 
+function konumAl() {
+  const btn = document.getElementById("locationBtn");
+  const status = document.getElementById("locationStatus");
+
+  if (!navigator.geolocation) {
+    status.textContent = "Bu tarayıcı konum özelliğini desteklemiyor.";
+    return;
+  }
+
+  btn.classList.add("loading");
+  btn.textContent = "📍 Konum alınıyor...";
+  status.textContent = "Konum izni bekleniyor...";
+
+  navigator.geolocation.getCurrentPosition(
+    function(position) {
+      const latitude = position.coords.latitude;
+      const longitude = position.coords.longitude;
+
+      btn.classList.remove("loading");
+      btn.textContent = "📍 Konumum alındı";
+      status.textContent = "Yakınındaki fırsatlar hazırlanıyor...";
+
+      console.log("HoopGo konum:", {
+        latitude: latitude,
+        longitude: longitude
+      });
+    },
+    function(error) {
+      btn.classList.remove("loading");
+      btn.textContent = "📍 Yakınımdaki fırsatları göster";
+
+      if (error.code === 1) {
+        status.textContent = "Konum izni verilmedi. Tarayıcı ayarlarından izin verebilirsin.";
+      } else if (error.code === 2) {
+        status.textContent = "Konum bilgisine ulaşılamadı. Lütfen tekrar dene.";
+      } else {
+        status.textContent = "Konum alınırken bir sorun oluştu. Tekrar deneyelim.";
+      }
+    },
+    {
+      enableHighAccuracy: true,
+      timeout: 10000,
+      maximumAge: 30000
+    }
+  );
+}
 
 function esnafOl() {
-
-  alert(
-    "Esnaf başvuru sistemi yakında burada olacak."
-  );
-
+  alert("Esnaf başvuru sistemi yakında burada olacak.");
 }
-
 </script>
 
 </body>
