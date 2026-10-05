@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>HoopGo | Mahallendeki Fırsatlar</title>
+
+<meta name="description" content="HoopGo ile mahallendeki esnafı keşfet, fırsatları yakala.">
+
+<style>
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f7f8fc;
+  color: #172033;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+}
+
+/* HEADER */
+
+header {
+  background: white;
+  border-bottom: 1px solid #eceef4;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.nav {
+  max-width: 1180px;
+  margin: auto;
+  height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 22px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 25px;
+  font-weight: 800;
+  color: #1d2440;
+}
+
+.logo-mark {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #6c4cff, #9a65ff);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  box-shadow: 0 8px 20px rgba(108,76,255,.25);
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav-btn {
+  padding: 11px 17px;
+  border-radius: 12px;
+  background: white;
+  border: 1px solid #e1e4ed;
+  color: #30374d;
+  font-weight: 700;
+}
+
+.nav-btn.primary {
+  background: #6c4cff;
+  color: white;
+  border-color: #6c4cff;
+}
+
+/* HERO */
+
+.hero {
+  background:
+    radial-gradient(circle at 80% 20%, rgba(143,104,255,.30), transparent 32%),
+    linear-gradient(135deg, #171c38, #292052 60%, #5a3fd1);
+  color: white;
+}
+
+.hero-inner {
+  max-width: 1180px;
+  margin: auto;
+  min-height: 430px;
+  padding: 70px 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+}
+
+.hero-text {
+  max-width: 650px;
+}
+
+.badge {
+  display: inline-block;
+  padding: 8px 13px;
+  border-radius: 30px;
+  background: rgba(255,255,255,.13);
+  border: 1px solid rgba(255,255,255,.20);
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.hero h1 {
+  font-size: clamp(38px, 6vw, 64px);
+  line-height: 1.02;
+  letter-spacing: -2px;
+  margin-bottom: 20px;
+}
+
+.hero h1 span {
+  color: #bda9ff;
+}
+
+.hero p {
+  font-size: 19px;
+  line-height: 1.6;
+  color: #e3e2f2;
+  max-width: 570px;
+  margin-bottom: 30px;
+}
+
+.search {
+  max-width: 610px;
+  background: white;
+  padding: 7px;
+  border-radius: 16px;
+  display: flex;
+  box-shadow: 0 15px 40px rgba(0,0,0,.20);
+}
+
+.search input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 14px;
+  color: #252b40;
+}
+
+.search button {
+  background: #6c4cff;
+  color: white;
+  border-radius: 11px;
+  padding: 0 22px;
+  font-weight: 700;
+}
+
+/* HERO CARD */
+
+.hero-card {
+  width: 300px;
+  background: rgba(255,255,255,.11);
+  border: 1px solid rgba(255,255,255,.18);
+  border-radius: 25px;
+  padding: 20px;
+  backdrop-filter: blur(12px);
+}
+
+.hero-card-image {
+  height: 175px;
+  border-radius: 18px;
+  background: linear-gradient(135deg,#ffb347,#ff7043);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 70px;
+  margin-bottom: 18px;
+}
+
+.hero-card small {
+  color: #d8d6e8;
+}
+
+.hero-card h3 {
+  margin: 7px 0;
+  font-size: 20px;
+}
+
+.price {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.old {
+  color: #aaa;
+  text-decoration: line-through;
+}
+
+.new {
+  font-size: 23px;
+  font-weight: 800;
+}
+
+/* CONTENT */
+
+.container {
+  max-width: 1180px;
+  margin: auto;
+  padding: 55px 22px;
+}
+
+.section-title {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.section-title h2 {
+  font-size: 30px;
+}
+
+.section-title p {
+  color: #747b8e;
+  margin-top: 7px;
+}
+
+/* CATEGORIES */
+
+.categories {
+  display: grid;
+  grid-template-columns: repeat(6,1fr);
+  gap: 14px;
+}
+
+.category {
+  background: white;
+  border: 1px solid #eceef4;
+  border-radius: 18px;
+  padding: 22px 10px;
+  text-align: center;
+  transition: .2s;
+}
+
+.category:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(30,35,70,.08);
+}
+
+.category-icon {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.category strong {
+  font-size: 14px;
+}
+
+/* OFFERS */
+
+.offers {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 22px;
+}
+
+.offer {
+  background: white;
+  border-radius: 22px;
+  overflow: hidden;
+  border: 1px solid #eceef4;
+  transition: .2s;
+}
+
+.offer:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(30,35,70,.10);
+}
+
+.offer-image {
+  height: 210px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 80px;
+}
+
+.food {
+  background: #fff0dc;
+}
+
+.coffee {
+  background: #ead8c5;
+}
+
+.shop {
+  background: #e2e7ff;
+}
+
+.offer-body {
+  padding: 19px;
+}
+
+.offer-location {
+  font-size: 13px;
+  color: #7b8190;
+  margin-bottom: 8px;
+}
+
+.offer h3 {
+  font-size: 20px;
+  margin-bottom: 13px;
+}
+
+.offer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.offer-price strong {
+  font-size: 23px;
+}
+
+.offer-price span {
+  color: #999;
+  text-decoration: line-through;
+  margin-left: 6px;
+  font-size: 14px;
+}
+
+.detail-btn {
+  background: #f0edff;
+  color: #6044dc;
+  padding: 9px 13px;
+  border-radius: 10px;
+  font-weight: 700;
+}
+
+/* CTA */
+
+.cta {
+  margin-top: 15px;
+  border-radius: 28px;
+  padding: 48px;
+  background: linear-gradient(135deg,#6c4cff,#38248d);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.cta h2 {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+.cta p {
+  color: #e6e1ff;
+  max-width: 600px;
+  line-height: 1.5;
+}
+
+.cta button {
+  background: white;
+  color: #5539d0;
+  padding: 14px 20px;
+  border-radius: 12px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+/* FOOTER */
+
+footer {
+  background: #171b2e;
+  color: white;
+  margin-top: 60px;
+}
+
+.footer-inner {
+  max-width: 1180px;
+  margin: auto;
+  padding: 45px 22px;
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.footer-text {
+  color: #aeb2c2;
+  margin-top: 10px;
+  max-width: 400px;
+  line-height: 1.5;
+}
+
+.footer-links {
+  display: flex;
+  gap: 25px;
+  color: #c9cbd5;
+}
+
+.copyright {
+  border-top: 1px solid rgba(255,255,255,.08);
+  text-align: center;
+  padding: 18px;
+  color: #85899a;
+  font-size: 13px;
+}
+
+/* MOBILE */
+
+@media (max-width: 900px) {
+
+  .hero-inner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hero-card {
+    display: none;
+  }
+
+  .categories {
+    grid-template-columns: repeat(3,1fr);
+  }
+
+  .offers {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .cta {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 600px) {
+
+  .nav {
+    height: 68px;
+  }
+
+  .logo {
+    font-size: 21px;
+  }
+
+  .logo-mark {
+    width: 34px;
+    height: 34px;
+  }
+
+  .nav-btn:first-child {
+    display: none;
+  }
+
+  .hero-inner {
+    padding: 55px 20px;
+  }
+
+  .hero h1 {
+    font-size: 42px;
+  }
+
+  .hero p {
+    font-size: 17px;
+  }
+
+  .search {
+    width: 100%;
+  }
+
+  .search input {
+    min-width: 0;
+  }
+
+  .search button {
+    padding: 0 14px;
+  }
+
+  .container {
+    padding: 40px 18px;
+  }
+
+  .categories {
+    grid-template-columns: repeat(3,1fr);
+    gap: 9px;
+  }
+
+  .category {
+    padding: 17px 5px;
+  }
+
+  .category-icon {
+    font-size: 27px;
+  }
+
+  .offers {
+    grid-template-columns: 1fr;
+  }
+
+  .section-title h2 {
+    font-size: 25px;
+  }
+
+  .cta {
+    padding: 32px 25px;
+  }
+
+  .cta h2 {
+    font-size: 27px;
+  }
+
+  .footer-inner {
+    flex-direction: column;
+  }
+
+  .footer-links {
+    flex-wrap: wrap;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <nav class="nav">
+
+    <div class="logo">
+      <div class="logo-mark">H</div>
+      HoopGo
+    </div>
+
+    <div class="nav-right">
+      <button class="nav-btn">Giriş Yap</button>
+      <button class="nav-btn primary">Esnaf Ol</button>
+    </div>
+
+  </nav>
+</header>
+
+<section class="hero">
+
+  <div class="hero-inner">
+
+    <div class="hero-text">
+
+      <div class="badge">
+        📍 Mahallendeki fırsatlar burada
+      </div>
+
+      <h1>
+        Yakınındaki<br>
+        <span>fırsatı yakala.</span>
+      </h1>
+
+      <p>
+        Mahallendeki esnafları keşfet,
+        özel fırsatları gör ve ihtiyacın olanı
+        sana en yakın yerden bul.
+      </p>
+
+      <div class="search">
+        <input
+          id="searchInput"
+          type="text"
+          placeholder="Ne arıyorsun? Örn: kahve, kuaför, yemek..."
+        >
+
+        <button onclick="ara()">
+          Ara
+        </button>
+      </div>
+
+    </div>
+
+    <div class="hero-card">
+
+      <div class="hero-card-image">
+        🥔
+      </div>
+
+      <small>🔥 Günün fırsatı</small>
+
+      <h3>
+        Özel Kumpir Menü
+      </h3>
+
+      <div class="price">
+        <span class="old">₺250</span>
+        <span class="new">₺175</span>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+<main>
+
+  <section class="container">
+
+    <div class="section-title">
+
+      <div>
+        <h2>Kategoriler</h2>
+        <p>Aradığını kolayca bul</p>
+      </div>
+
+    </div>
+
+    <div class="categories">
+
+      <div class="category">
+        <div class="category-icon">🍔</div>
+        <strong>Yeme & İçme</strong>
+      </div>
+
+      <div class="category">
+        <div class="category-icon">💇</div>
+        <strong>Güzellik</strong>
+      </div>
+
+      <div class="category">
+        <div class="category-icon">🛒</div>
+        <strong>Market</strong>
+      </div>
+
+      <div class="category">
+        <div class="category-icon">👕</div>
+        <strong>Giyim</strong>
+      </div>
+
+      <div class="category">
+        <div class="category-icon">🔧</div>
+        <strong>Hizmet</strong>
+      </div>
+
+      <div class="category">
+        <div class="category-icon">🏠</div>
+        <strong>Ev & Yaşam</strong>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <section class="container">
+
+    <div class="section-title">
+
+      <div>
+        <h2>Bugünün fırsatları 🔥</h2>
+        <p>Mahallendeki güncel fırsatlar</p>
+      </div>
+
+    </div>
+
+    <div class="offers">
+
+      <article class="offer">
+
+        <div class="offer-image food">
+          🥔
+        </div>
+
+        <div class="offer-body">
+
+          <div class="offer-location">
+            📍 Beylikdüzü
+          </div>
+
+          <h3>
+            Özel Kumpir Menü
+          </h3>
+
+          <div class="offer-bottom">
+
+            <div class="offer-price">
+              <strong>₺175</strong>
+              <span>₺250</span>
+            </div>
+
+            <button class="detail-btn">
+              İncele
+            </button>
+
+          </div>
+
+        </div>
+
+      </article>
+
+
+      <article class="offer">
+
+        <div class="offer-image coffee">
+          ☕
+        </div>
+
+        <div class="offer-body">
+
+          <div class="offer-location">
+            📍 Beylikdüzü
+          </div>
+
+          <h3>
+            Kahve + Tatlı
+          </h3>
+
+          <div class="offer-bottom">
+
+            <div class="offer-price">
+              <strong>₺190</strong>
+              <span>₺260</span>
+            </div>
+
+            <button class="detail-btn">
+              İncele
+            </button>
+
+          </div>
+
+        </div>
+
+      </article>
+
+
+      <article class="offer">
+
+        <div class="offer-image shop">
+          👟
+        </div>
+
+        <div class="offer-body">
+
+          <div class="offer-location">
+            📍 Beylikdüzü
+          </div>
+
+          <h3>
+            Sezon Sonu İndirimi
+          </h3>
+
+          <div class="offer-bottom">
+
+            <div class="offer-price">
+              <strong>%40</strong>
+            </div>
+
+            <button class="detail-btn">
+              İncele
+            </button>
+
+          </div>
+
+        </div>
+
+      </article>
+
+    </div>
+
+  </section>
+
+
+  <section class="container">
+
+    <div class="cta">
+
+      <div>
+        <h2>Esnaf mısın?</h2>
+
+        <p>
+          İşletmeni HoopGo'ya ekle.
+          Fırsatlarını yayınla, mahallendeki
+          müşterilere ulaş.
+        </p>
+      </div>
+
+      <button onclick="esnafOl()">
+        Esnaf olarak katıl →
+      </button>
+
+    </div>
+
+  </section>
+
+</main>
+
+
+<footer>
+
+  <div class="footer-inner">
+
+    <div>
+
+      <div class="logo">
+        <div class="logo-mark">H</div>
+        HoopGo
+      </div>
+
+      <p class="footer-text">
+        Mahallendeki esnafı ve fırsatları
+        tek yerde buluşturan yeni nesil
+        yerel platform.
+      </p>
+
+    </div>
+
+    <div class="footer-links">
+      <span>Hakkımızda</span>
+      <span>İletişim</span>
+      <span>Gizlilik</span>
+      <span>Koşullar</span>
+    </div>
+
+  </div>
+
+  <div class="copyright">
+    © 2026 HoopGo — Mahallene değer katar.
+  </div>
+
+</footer>
+
+
+<script>
+
+function ara() {
+
+  const input =
+    document.getElementById("searchInput");
+
+  const kelime =
+    input.value.trim();
+
+  if (!kelime) {
+    alert("Ne aradığını yaz 😊");
+    input.focus();
+    return;
+  }
+
+  alert(
+    '"' +
+    kelime +
+    '" için arama sistemi birazdan aktif olacak.'
+  );
+}
+
+
+function esnafOl() {
+
+  alert(
+    "Esnaf başvuru sistemi yakında burada olacak."
+  );
+
+}
+
+</script>
+
+</body>
+</html>
